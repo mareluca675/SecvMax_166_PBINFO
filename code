@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+long long v[100001], n, i, l = 1, dmax = 0, s = 0, smax = 0, sumamax = 0, st, dr, ok = 0;
+
+int main()
+{
+    ifstream fin("secvmax.in");
+    ofstream fout("secvmax.out");
+    
+    fin >> n;
+    
+    for(i = 1; i <= n; i++)
+    {
+        fin >> v[i];
+    }
+    
+    for(i = 1; i <= n; i++)
+    {
+        if(v[i] % 2)
+        {
+            int j = i;
+            while(j < n && v[j + 1] % 2 == 0)
+            {
+                j++;
+                s += v[j + 1];
+            }
+            
+            if(j - i + 1 > dmax - smax + 1 and s > sumamax)
+            {
+                smax = i + 1; dmax = j;
+                sumamax = s;
+            }
+            i = j;
+        }
+    }
+    
+    fout << smax << " "<< dmax;
+    
+    return 0;
+}
